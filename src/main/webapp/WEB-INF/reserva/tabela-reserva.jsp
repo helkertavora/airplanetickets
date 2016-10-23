@@ -10,22 +10,20 @@
 	<thead>
 		<tr id="cabecalho">
 			<td>#</td>
-			<td>Nome</td>
-			<td>Voos da Empresa / Sigla</td>
+			<td>Voo sigla</td>
+			<td>Voo Numero</td>
+			<td>Cliente da reserva</td>
 			<td>Ações</td>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${empresaAereas}" var="empresaAerea">
-			<tr data-id="${empresaAerea.id}">
+		<c:forEach items="${reservas}" var="reserva">
+			<tr data-id="${reserva.id}">
 			
-				<td>${empresaAerea.id}</td>
-				<td>${empresaAerea.nome}</td>
-				<td>
-					<c:forEach items="${empresaAerea.voos}" var="voo">
-						${voo.numero} , ${voo.sigla} /
-					</c:forEach>
-				</td>
+				<td>${reserva.id}</td>
+				<td>${reserva.voo.sigla}</td>
+				<td>${reserva.voo.numero}</td>
+				<td>${reserva.cliente.nome}</td>
 				<td><button type="button" class="btn btn-warning btn-editar">Editar</button>
 					<button type="button" class="btn btn-danger btn-deletar">Apagar</button>
 				</td>
@@ -35,12 +33,12 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="4">Empresas Aereas cadastradas:<span id="qtd-empresaAerea"> ${empresaAereas.size()}</span></td>
+			<td colspan="5">Reservas cadastradas:<span id="qtd-reserva"> ${reservas.size()}</span></td>
 		</tr>
 		<tr>
-			<td colspan="4">
+			<td colspan="5">
 				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#modal-empresaAerea">Cadastrar Empresa Aerea</button>
+					data-target="#modal-reserva">Cadastrar Reserva</button>
 			</td>
 		</tr>
 	</tfoot>

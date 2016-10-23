@@ -24,7 +24,10 @@
       <li><a href="cliente">Clientes</a></li>
       <li><a href="passageiro">Passageiros</a></li>
       <li><a href="empresaAerea">Empresas Aereas</a></li>  
-      <li><a href="voo">Voos</a></li>  
+      <li><a href="voo">Voos</a></li> 
+      <li><a href="reserva">Reservas</a></li>
+      <li><a href="passagem">Passagens</a></li>   
+      <li><a href="pagamento">Pagamentos</a></li>   
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>

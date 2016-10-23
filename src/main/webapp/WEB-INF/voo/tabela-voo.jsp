@@ -29,8 +29,8 @@
 				<td>${voo.id}</td>
 				<td>${voo.sigla}</td>
 				<td>${voo.numero}</td>
-				<fmt:formatDate value="${voo.dataHoraPrevistoSaida}" pattern="dd/MM/yyyy' at: 'hh:mm:ss"/>
-				<fmt:formatDate value="${voo.dataHoraPrevistoChegada}" pattern="dd/MM/yyyy' at: 'hh:mm:ss"/>
+				<td><fmt:formatDate value="${voo.dataHoraPrevistoSaida}" pattern="dd/MM/yyyy' at: 'hh:mm:ss"/></td>
+				<td><fmt:formatDate value="${voo.dataHoraPrevistoChegada}" pattern="dd/MM/yyyy' at: 'hh:mm:ss"/></td>
 				<td>${voo.aeroportoSaida.nome}</td>
 				<td>${voo.aeroportoChegada.nome}</td>
 				<td><fmt:formatNumber value="${voo.valor}" type="currency"/></td>

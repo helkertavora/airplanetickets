@@ -10,22 +10,22 @@
 	<thead>
 		<tr id="cabecalho">
 			<td>#</td>
-			<td>Nome</td>
-			<td>Voos da Empresa / Sigla</td>
+			<td>Data</td>
+			<td>Tipo do Pagamento</td>
+			<td>Reserva</td>
+			<td>Valor do pagamento R$:</td>
 			<td>Ações</td>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${empresaAereas}" var="empresaAerea">
-			<tr data-id="${empresaAerea.id}">
+		<c:forEach items="${pagamentos}" var="pagamento">
+			<tr data-id="${pagamento.id}">
 			
-				<td>${empresaAerea.id}</td>
-				<td>${empresaAerea.nome}</td>
-				<td>
-					<c:forEach items="${empresaAerea.voos}" var="voo">
-						${voo.numero} , ${voo.sigla} /
-					</c:forEach>
-				</td>
+				<td>${pagamento.id}</td>
+				<fmt:formatDate value="${pagamento.data}" pattern="dd/MM/yyyy' at: 'hh:mm:ss"/>
+				<td>${pagamento.tipoPagamento.descricao}</td>
+				<td>${pagamento.reserva.voo.numero} / ${passagem.reserva.voo.sigla}</td>
+				<td><fmt:formatNumber value="${pagamento.valor}" type="currency"/></td>
 				<td><button type="button" class="btn btn-warning btn-editar">Editar</button>
 					<button type="button" class="btn btn-danger btn-deletar">Apagar</button>
 				</td>
@@ -35,12 +35,12 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="4">Empresas Aereas cadastradas:<span id="qtd-empresaAerea"> ${empresaAereas.size()}</span></td>
+			<td colspan="6">Pagamentos cadastrados:<span id="qtd-pagamento"> ${pagamentos.size()}</span></td>
 		</tr>
 		<tr>
-			<td colspan="4">
+			<td colspan="6">
 				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#modal-empresaAerea">Cadastrar Empresa Aerea</button>
+					data-target="#modal-pagamento">Cadastrar Pagamento</button>
 			</td>
 		</tr>
 	</tfoot>

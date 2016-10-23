@@ -45,4 +45,13 @@ public class EmpresaAerea extends BaseModel {
         this.sigla = sigla;
     }
 
+	public List<Voo> getVoos() {
+		return voos;
+	}
+
+	public void setVoos(List<Voo> voos) {
+		this.voos = voos;
+	}
+    
+
 }
