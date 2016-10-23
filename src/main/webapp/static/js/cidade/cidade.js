@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+	aplicarListeners();
+	
 });	
 
 $('#btn-salvar').on('click', function(){

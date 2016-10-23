@@ -69,6 +69,15 @@ var limparModal = function(){
 
 	}
 	
-	
+	$(document).ready(function(){
+		   $(".btn-deletar").click( function(event) {
+		      var apagar = confirm('Deseja realmente excluir este registro?');
+		      if (apagar){
+		    	  
+		      }else{
+		         event.preventDefault();
+		      }	
+		   });
+		});
 
 
