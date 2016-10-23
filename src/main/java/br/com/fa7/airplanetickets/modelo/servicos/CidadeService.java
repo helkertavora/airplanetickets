@@ -13,6 +13,11 @@ public class CidadeService {
 	private CidadeRepository repositorio;
 	
 	public void salvar(Cidade cidade){
+		if (cidade.getId() != null){
+			Cidade cidadeSaved = this.buscar(cidade.getId());
+			cidade.setEstaAtivo(cidadeSaved.getEstaAtivo());
+			cidade.setDataRegistro(cidadeSaved.getDataRegistro());
+		}		
 		repositorio.save(cidade);
 	}
 	

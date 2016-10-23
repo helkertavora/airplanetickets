@@ -26,61 +26,66 @@ import br.com.fa7.airplanetickets.propertyeditors.CidadePropertyEditor;
 @Controller
 @RequestMapping("/aeroporto")
 public class AeroportoController {
-	
+
 	@Autowired
 	private AeroportoService aeroportoService;
 	@Autowired
 	private CidadeService cidadeService;
 	@Autowired
 	private CidadePropertyEditor cidadePropertyEditor;
-	
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public String listarAeroporto(Model model){
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String listarAeroporto(Model model) {
 		Iterable<Aeroporto> aeroportos = aeroportoService.listar();
-		
+
 		model.addAttribute("titulo", "Listagem de Aeroportos");
 		model.addAttribute("aeroportos", aeroportos);
 		model.addAttribute("cidades", cidadeService.listar());
-		
+
 		return "aeroporto/listagem";
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
+
+	@RequestMapping(method = RequestMethod.POST)
 	public String salvarAeroporto(@Valid @ModelAttribute Aeroporto aeroporto, BindingResult bindingResult,
-			Model model){
-		if(bindingResult.hasErrors()){
+			Model model) {
+		if (bindingResult.hasErrors()) {
 			throw new AeroportoException();
-		}else{
+		} else {
 			aeroportoService.salvar(aeroporto);
 		}
 		model.addAttribute("aeroportos", aeroportoService.listar());
 		return "aeroporto/tabela-aeroporto";
 	}
-	
-	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
-	public ResponseEntity<String> deletarAeroporto(@PathVariable Integer id){	
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+	public ResponseEntity<String> deletarAeroporto(@PathVariable Integer id) {
 		try {
 			aeroportoService.remover(id);
 			return new ResponseEntity<String>(HttpStatus.OK);
-			
+
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	//metodo de update
-	@RequestMapping(method=RequestMethod.GET, value="/{id}")
+
+	// metodo de update
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody
-	public Aeroporto buscarAeroporto(@PathVariable Integer id){
+	public Aeroporto buscarAeroporto(@PathVariable Integer id) {
 		Aeroporto aeroporto = aeroportoService.buscar(id);
 		return aeroporto;
 	}
-	
+
 	@InitBinder
-	public void transformTextInLong(WebDataBinder webDataBinder){
+	public void transformTextInLong(WebDataBinder webDataBinder) {
 		webDataBinder.registerCustomEditor(Cidade.class, cidadePropertyEditor);
-		
+
 	}
-	
+
+	@RequestMapping("/cidade/{nome}")
+	@ResponseBody
+	public Iterable<Aeroporto> buscarPorCidade(@PathVariable String nome) {
+		return aeroportoService.buscarPorCidade(nome);
+	}
+
 }

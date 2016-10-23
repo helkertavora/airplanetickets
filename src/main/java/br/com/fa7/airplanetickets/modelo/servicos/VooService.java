@@ -13,6 +13,12 @@ public class VooService {
 	private VooRepository repositorio;
 	
 	public void salvar(Voo voo){
+		if (voo.getId() != null){
+			Voo vooSaved = this.buscar(voo.getId());
+			voo.setEstaAtivo(vooSaved.getEstaAtivo());
+			voo.setDataRegistro(vooSaved.getDataRegistro());
+		}		
+		
 		repositorio.save(voo);
 	}
 	

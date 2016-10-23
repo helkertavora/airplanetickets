@@ -18,6 +18,12 @@ public class ReservaService {
     private ReservaRepository reservaRepository;
     
     public void salvar(Reserva reserva){
+		if (reserva.getId() != null){
+			Reserva reservaSaved = this.buscar(reserva.getId());
+			reserva.setEstaAtivo(reservaSaved.getEstaAtivo());
+			reserva.setDataRegistro(reservaSaved.getDataRegistro());
+		}	    	
+    	
     	reservaRepository.save(reserva);
 	}
 	

@@ -13,6 +13,12 @@ public class TipoPagamentoService {
 	private TipoPagamentoRepository repositorio;
 	
 	public void salvar(TipoPagamento tipoPagamento){
+		if (tipoPagamento.getId() != null){
+			TipoPagamento tipoPagamentoSaved = this.buscar(tipoPagamento.getId());
+			tipoPagamento.setEstaAtivo(tipoPagamentoSaved.getEstaAtivo());
+			tipoPagamento.setDataRegistro(tipoPagamentoSaved.getDataRegistro());
+		}			
+		
 		repositorio.save(tipoPagamento);
 	}
 	

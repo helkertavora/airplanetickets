@@ -13,6 +13,11 @@ public class ClienteService {
 	private ClienteRepository repositorio;
 	
 	public void salvar(Cliente cliente){
+		if (cliente.getId() != null){
+			Cliente clienteSaved = this.buscar(cliente.getId());
+			cliente.setEstaAtivo(clienteSaved.getEstaAtivo());
+			cliente.setDataRegistro(clienteSaved.getDataRegistro());
+		}			
 		repositorio.save(cliente);
 	}
 	

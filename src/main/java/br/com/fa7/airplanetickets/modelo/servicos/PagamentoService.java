@@ -13,6 +13,11 @@ public class PagamentoService {
 	private PagamentoRepository repositorio;
 	
 	public void salvar(Pagamento pagamento){
+		if (pagamento.getId() != null){
+			Pagamento pagamentoSaved = this.buscar(pagamento.getId());
+			pagamento.setEstaAtivo(pagamentoSaved.getEstaAtivo());
+			pagamento.setDataRegistro(pagamentoSaved.getDataRegistro());
+		}			
 		repositorio.save(pagamento);
 	}
 	

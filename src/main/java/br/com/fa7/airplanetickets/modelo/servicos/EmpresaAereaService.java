@@ -13,6 +13,11 @@ public class EmpresaAereaService {
 	private EmpresaAereaRepository repositorio;
 	
 	public void salvar(EmpresaAerea empresaAerea){
+		if (empresaAerea.getId() != null){
+			EmpresaAerea empresaAereaSaved = this.buscar(empresaAerea.getId());
+			empresaAerea.setEstaAtivo(empresaAereaSaved.getEstaAtivo());
+			empresaAerea.setDataRegistro(empresaAereaSaved.getDataRegistro());
+		}		
 		repositorio.save(empresaAerea);
 	}
 	

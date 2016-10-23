@@ -5,9 +5,11 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.hibernate.EmptyInterceptor;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,9 +18,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+import br.com.fa7.airplanetickets.modelo.auditoria.AuditInterceptor;
+
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "br.com.fa7.airplanetickets.modelo.repositorios")
+@EnableJpaAuditing
 public class ConfiguracaoBD {
 	
 	@Bean
@@ -51,13 +56,16 @@ public class ConfiguracaoBD {
 		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		entityManagerFactoryBean.setJpaDialect(hibernateJpaDialect());
 		
-		Properties jpaProterties = new Properties();
-		jpaProterties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
-		jpaProterties.put("hibernate.ejb.naming_strategy","org.hibernate.cfg.ImprovedNamingStrategy");
-		jpaProterties.put("hibernate.show_sql","true");
-		jpaProterties.put("hibernate.format_sql","true");
-		jpaProterties.put("hibernate.hbm2ddl.auto","update");
-		entityManagerFactoryBean.setJpaProperties(jpaProterties);
+		Properties jpaProperties = new Properties();
+		jpaProperties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
+		jpaProperties.put("hibernate.ejb.naming_strategy","org.hibernate.cfg.ImprovedNamingStrategy");
+		jpaProperties.put("hibernate.show_sql","true");
+		jpaProperties.put("hibernate.format_sql","true");
+		jpaProperties.put("hibernate.hbm2ddl.auto","update");
+		
+		jpaProperties.put("hibernate.ejb.interceptor", hibernateInterceptor()); //adicionando auditoria
+		
+		entityManagerFactoryBean.setJpaProperties(jpaProperties);
 		return entityManagerFactoryBean;
 	}
 	
@@ -71,6 +79,11 @@ public class ConfiguracaoBD {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 		return transactionManager;
+	}
+	
+	@Bean
+	public EmptyInterceptor hibernateInterceptor() {
+	    return new AuditInterceptor();
 	}
 
 }

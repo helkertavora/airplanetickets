@@ -13,6 +13,12 @@ public class PassagemService {
 	private PassagemRepository repositorio;
 	
 	public void salvar(Passagem passagem){
+		if (passagem.getId() != null){
+			Passagem passagemSaved = this.buscar(passagem.getId());
+			passagem.setEstaAtivo(passagemSaved.getEstaAtivo());
+			passagem.setDataRegistro(passagemSaved.getDataRegistro());
+		}		
+		
 		repositorio.save(passagem);
 	}
 	

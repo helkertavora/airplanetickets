@@ -13,6 +13,11 @@ public class PassageiroService {
 	private PassageiroRepository repositorio;
 	
 	public void salvar(Passageiro passageiro){
+		if (passageiro.getId() != null){
+			Passageiro passageiroSaved = this.buscar(passageiro.getId());
+			passageiro.setEstaAtivo(passageiroSaved.getEstaAtivo());
+			passageiro.setDataRegistro(passageiroSaved.getDataRegistro());
+		}		
 		repositorio.save(passageiro);
 	}
 	

@@ -1,13 +1,13 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "passagem")
@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @Where(clause = "esta_ativo = '1'")
 public class Passagem extends BaseModel {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+	private static final long serialVersionUID = 7843226344506258083L;
+
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_passageiro", nullable = false)
     private Passageiro passageiro;
 

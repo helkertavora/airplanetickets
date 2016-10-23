@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @Where(clause = "esta_ativo = '1'")
 public class Reserva extends BaseModel {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+	private static final long serialVersionUID = 4806908597374820089L;
+
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_voo", nullable = false)
     private Voo voo;
 
