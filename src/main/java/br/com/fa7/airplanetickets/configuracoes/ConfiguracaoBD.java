@@ -27,7 +27,19 @@ public class ConfiguracaoBD {
 		dataSource.setDriverClass("org.postgresql.Driver");
 		dataSource.setJdbcUrl("jdbc:postgresql://localhost:5432/airplanetickets");
 		dataSource.setUser("postgres");
-		dataSource.setPassword("46415279");
+		dataSource.setPassword("postgres");
+		
+		//Inicio C3P0 - http://www.mchange.com/projects/c3p0/index.html#maxIdleTime
+		dataSource.setInitialPoolSize(5);
+		dataSource.setMinPoolSize(5);
+		dataSource.setMaxPoolSize(20);
+		dataSource.setAcquireIncrement(1);
+		dataSource.setMaxIdleTime(300);
+		dataSource.setMaxStatements(50);		
+		dataSource.setIdleConnectionTestPeriod(1000);
+		dataSource.setPreferredTestQuery("SELECT 1"); //http://stackoverflow.com/questions/3668506/efficient-sql-test-query-or-validation-query-that-will-work-across-all-or-most
+		//Fim C3P0
+		
 		return dataSource;
 	}
 	
