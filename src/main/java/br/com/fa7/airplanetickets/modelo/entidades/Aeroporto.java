@@ -1,5 +1,8 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "aeroporto")
+@SQLDelete(sql = "UPDATE aeroporto SET esta_ativo = false WHERE id = ?")
+@Where(clause = "esta_ativo = '1'")
 public class Aeroporto extends BaseModel {
 
     private static final long serialVersionUID = -6678427990001459270L;

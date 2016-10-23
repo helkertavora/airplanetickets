@@ -1,6 +1,10 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +17,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "voo")
+@SQLDelete(sql = "UPDATE voo SET esta_ativo = false WHERE id = ?")
+@Where(clause = "esta_ativo = '1'")
 public class Voo extends BaseModel {
 
     private static final long serialVersionUID = 8975930420033386634L;
@@ -35,11 +41,11 @@ public class Voo extends BaseModel {
     @Basic(optional = false)
     private Date dataHoraPrevistoChegada;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_aeroporto_saida", nullable = false)
     private Aeroporto aeroportoSaida;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_aeroporto_chegada", nullable = false)
     private Aeroporto aeroportoChegada;
 
@@ -47,7 +53,7 @@ public class Voo extends BaseModel {
     @Basic(optional = false)
     private Double valor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_empresa_aerea", nullable = false)
     private EmpresaAerea empresaAerea;
 

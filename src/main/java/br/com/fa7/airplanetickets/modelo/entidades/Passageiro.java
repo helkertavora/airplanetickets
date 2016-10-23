@@ -1,7 +1,7 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
-import br.com.fa7.airplanetickets.modelo.enumeracoes.RelactionamentoContatoEmergencia;
-import br.com.fa7.airplanetickets.modelo.enumeracoes.TipoDocumento;
+
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,11 +13,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import java.util.Date;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import br.com.fa7.airplanetickets.modelo.enumeracoes.RelactionamentoContatoEmergencia;
+import br.com.fa7.airplanetickets.modelo.enumeracoes.TipoDocumento;
 
 @Entity
 @Table(name = "passageiro")
 @PrimaryKeyJoinColumn(name = "id_pessoa")
+@SQLDelete(sql = "UPDATE passageiro SET esta_ativo = false WHERE id = ?")
+@Where(clause = "esta_ativo = '1'")
 public class Passageiro extends Pessoa {
 
     private static final long serialVersionUID = 6882115490287337078L;

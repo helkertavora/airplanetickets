@@ -1,5 +1,8 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -8,6 +11,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente")
 @PrimaryKeyJoinColumn(name = "id_pessoa")
+@SQLDelete(sql = "UPDATE cliente SET esta_ativo = false WHERE id = ?")
+@Where(clause = "esta_ativo = '1'")
 public class Cliente extends Pessoa {
 
     private static final long serialVersionUID = 6882115490287337078L;

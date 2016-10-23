@@ -1,5 +1,8 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +14,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "empresa_aerea")
+@SQLDelete(sql = "UPDATE empresa_aerea SET esta_ativo = false WHERE id = ?")
+@Where(clause = "esta_ativo = '1'")
 public class EmpresaAerea extends BaseModel {
 
     private static final long serialVersionUID = 5262427790467856178L;
@@ -44,14 +49,5 @@ public class EmpresaAerea extends BaseModel {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
-
-	public List<Voo> getVoos() {
-		return voos;
-	}
-
-	public void setVoos(List<Voo> voos) {
-		this.voos = voos;
-	}
-    
 
 }

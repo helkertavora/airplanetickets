@@ -1,5 +1,8 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -8,6 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "passagem")
+@SQLDelete(sql = "UPDATE passagem SET esta_ativo = false WHERE id = ?")
+@Where(clause = "esta_ativo = '1'")
 public class Passagem extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY)

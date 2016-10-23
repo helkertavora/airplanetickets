@@ -1,7 +1,6 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -97,11 +96,6 @@ public abstract class BaseModel implements Serializable {
         } catch (InvocationTargetException e) {
             return null;
         }
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
     }
 
     @PrePersist
