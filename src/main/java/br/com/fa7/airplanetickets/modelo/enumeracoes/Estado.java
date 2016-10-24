@@ -33,7 +33,7 @@ public enum Estado {
     private String sigla;
     private String nome;
 
-    private Estado(String nome, String Sigla) {
+    private Estado(String nome, String sigla) {
         this.nome = nome;
         this.sigla = sigla;
     }

@@ -22,7 +22,7 @@
 			<tr data-id="${pagamento.id}">
 			
 				<td>${pagamento.id}</td>
-				<fmt:formatDate value="${pagamento.data}" pattern="dd/MM/yyyy' at: 'hh:mm:ss"/>
+				<td><fmt:formatDate value="${pagamento.data}" pattern="dd/MM/yyyy' at: 'hh:mm:ss"/></td>
 				<td>${pagamento.tipoPagamento.descricao}</td>
 				<td>${pagamento.reserva.voo.numero} / ${passagem.reserva.voo.sigla}</td>
 				<td><fmt:formatNumber value="${pagamento.valor}" type="currency"/></td>

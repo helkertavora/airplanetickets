@@ -3,6 +3,7 @@ package br.com.fa7.airplanetickets.modelo.entidades;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -17,11 +18,11 @@ public class Reserva extends BaseModel {
 
 	private static final long serialVersionUID = 4806908597374820089L;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_voo", nullable = false)
     private Voo voo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 

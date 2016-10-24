@@ -33,7 +33,6 @@
         <li>
         	<form action="${path}/sair" method="post">
         	<input type="hidden" name="_csrf" value="${_csrf.token}">
-        	<button id="btn-sair" type="submit" class="btn btn-default">Sair da Aplicaçao</button>
         	</form>
         </li>
       </ul>

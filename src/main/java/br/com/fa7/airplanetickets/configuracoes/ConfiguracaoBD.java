@@ -25,7 +25,7 @@ import br.com.fa7.airplanetickets.modelo.auditoria.AuditInterceptor;
 @EnableJpaRepositories(basePackages = "br.com.fa7.airplanetickets.modelo.repositorios")
 @EnableJpaAuditing
 public class ConfiguracaoBD {
-	
+
 	@Bean
 	public DataSource dataSource() throws IllegalStateException, PropertyVetoException {
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -33,21 +33,22 @@ public class ConfiguracaoBD {
 		dataSource.setJdbcUrl("jdbc:postgresql://localhost:5432/airplanetickets");
 		dataSource.setUser("postgres");
 		dataSource.setPassword("postgres");
-		
-		//Inicio C3P0 - http://www.mchange.com/projects/c3p0/index.html#maxIdleTime
+
+		// Inicio C3P0 -
+		// http://www.mchange.com/projects/c3p0/index.html#maxIdleTime
 		dataSource.setInitialPoolSize(5);
 		dataSource.setMinPoolSize(5);
 		dataSource.setMaxPoolSize(20);
 		dataSource.setAcquireIncrement(1);
 		dataSource.setMaxIdleTime(300);
-		dataSource.setMaxStatements(50);		
+		dataSource.setMaxStatements(50);
 		dataSource.setIdleConnectionTestPeriod(1000);
-		dataSource.setPreferredTestQuery("SELECT 1"); //http://stackoverflow.com/questions/3668506/efficient-sql-test-query-or-validation-query-that-will-work-across-all-or-most
-		//Fim C3P0
-		
+		dataSource.setPreferredTestQuery("SELECT 1"); // http://stackoverflow.com/questions/3668506/efficient-sql-test-query-or-validation-query-that-will-work-across-all-or-most
+		// Fim C3P0
+
 		return dataSource;
 	}
-	
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws Exception {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -55,35 +56,47 @@ public class ConfiguracaoBD {
 		entityManagerFactoryBean.setPackagesToScan("br.com.fa7.airplanetickets.modelo.entidades");
 		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		entityManagerFactoryBean.setJpaDialect(hibernateJpaDialect());
-		
+
 		Properties jpaProperties = new Properties();
-		jpaProperties.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
-		jpaProperties.put("hibernate.ejb.naming_strategy","org.hibernate.cfg.ImprovedNamingStrategy");
-		jpaProperties.put("hibernate.show_sql","true");
-		jpaProperties.put("hibernate.format_sql","true");
-		jpaProperties.put("hibernate.hbm2ddl.auto","update");
-		
-		jpaProperties.put("hibernate.ejb.interceptor", hibernateInterceptor()); //adicionando auditoria
-		
+		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+		jpaProperties.put("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
+		jpaProperties.put("hibernate.show_sql", "true");
+		jpaProperties.put("hibernate.format_sql", "true");
+		jpaProperties.put("hibernate.hbm2ddl.auto", "update");
+
+		jpaProperties.put("hibernate.ejb.interceptor", hibernateInterceptor()); // adicionando
+																				// auditoria
+
 		entityManagerFactoryBean.setJpaProperties(jpaProperties);
 		return entityManagerFactoryBean;
 	}
-	
+
 	@Bean
-	public HibernateJpaDialect hibernateJpaDialect(){
+	public HibernateJpaDialect hibernateJpaDialect() {
 		return new HibernateJpaDialect();
 	}
-	
+
 	@Bean
 	public JpaTransactionManager transactionManager() throws Exception {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 		return transactionManager;
 	}
-	
+
 	@Bean
 	public EmptyInterceptor hibernateInterceptor() {
-	    return new AuditInterceptor();
+		return new AuditInterceptor();
 	}
+
+//	@Bean
+//	public DataSourceInitializer dataSourceInitializer() throws Exception{
+//		ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+//		resourceDatabasePopulator.addScript(new ClassPathResource("/data.sql"));
+//
+//		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
+//		dataSourceInitializer.setDataSource(dataSource());
+//		dataSourceInitializer.setDatabasePopulator(resourceDatabasePopulator);
+//		return dataSourceInitializer;
+//	}
 
 }

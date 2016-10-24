@@ -20,7 +20,6 @@ import br.com.fa7.airplanetickets.excessoes.EmpresaAereaException;
 import br.com.fa7.airplanetickets.modelo.entidades.EmpresaAerea;
 import br.com.fa7.airplanetickets.modelo.entidades.Voo;
 import br.com.fa7.airplanetickets.modelo.servicos.EmpresaAereaService;
-import br.com.fa7.airplanetickets.modelo.servicos.VooService;
 import br.com.fa7.airplanetickets.propertyeditors.VooPropertyEditor;
 
 @Controller
@@ -29,8 +28,6 @@ public class EmpresaAereaController {
 	
 	@Autowired
 	private EmpresaAereaService empresaAereaService;
-	@Autowired
-	private VooService vooService;
 	@Autowired
 	private VooPropertyEditor vooPropertyEditor;
 	
@@ -41,7 +38,6 @@ public class EmpresaAereaController {
 		
 		model.addAttribute("titulo", "Listagem de Empresas Aeras");
 		model.addAttribute("empresaAereas", empresaAerea);
-		model.addAttribute("voos", vooService.listar());
 		
 		return "empresaAerea/listagem";
 	}

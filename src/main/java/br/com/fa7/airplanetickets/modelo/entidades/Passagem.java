@@ -1,5 +1,6 @@
 package br.com.fa7.airplanetickets.modelo.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -17,11 +18,11 @@ public class Passagem extends BaseModel {
 
 	private static final long serialVersionUID = 7843226344506258083L;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_passageiro", nullable = false)
     private Passageiro passageiro;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_reserva", nullable = false)
     private Reserva reserva;
 

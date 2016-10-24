@@ -23,15 +23,7 @@
 			
 			<label for="sigla">Sigla: </label>
 			<input id="sigla" name="sigla" class="form-control">
-			
-			<label for="voos">Voos da Empresa: </label>
-			<select id="voos" name="voos" class="form-control" multiple="multiple">
-			<option value="">---selecione---</option>
-				<c:forEach items="${voos}" var="voo">
-				<option value="${voo.id}">${voo.numero} / ${voo.sigla}</option>
-				</c:forEach>
-			</select>
-			
+						
 			<input id="id" name="id" type="hidden">
 			<input type="hidden" id="_csrf" name="_csrf" value="${_csrf.token}">
 			</div>

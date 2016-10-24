@@ -11,7 +11,6 @@
 		<tr id="cabecalho">
 			<td>#</td>
 			<td>Nome</td>
-			<td>Voos da Empresa / Sigla</td>
 			<td>Ações</td>
 		</tr>
 	</thead>
@@ -21,11 +20,6 @@
 			
 				<td>${empresaAerea.id}</td>
 				<td>${empresaAerea.nome}</td>
-				<td>
-					<c:forEach items="${empresaAerea.voos}" var="voo">
-						${voo.numero} , ${voo.sigla} /
-					</c:forEach>
-				</td>
 				<td><button type="button" class="btn btn-warning btn-editar">Editar</button>
 					<button type="button" class="btn btn-danger btn-deletar">Apagar</button>
 				</td>
