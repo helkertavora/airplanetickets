@@ -25,7 +25,7 @@ var limparModal = function(){
 	$('#id').val('');
 	$('#nome').val('');
 	$('#sigla').val('');
-	$('#voos option').attr('selected', false);
+	
 };
 	
 
@@ -57,11 +57,6 @@ var limparModal = function(){
 				$('#id').val(empresaAerea.id);
 				$('#nome').val(empresaAerea.nome);
 				$('#sigla').val(empresaAerea.sigla);
-				empresaAerea.voos.forEach(function(voo){
-					var id = voo.id;
-					$('#voos option[value='+id+']').attr('selected', true);
-				});
-				
 				$('#modal-empresaAerea').modal('show');
 			});
 				

@@ -24,7 +24,7 @@
 			<label for="nome">Nome: </label>
 			<input id="nome" name="nome" class="form-control">
 			
-			<label for="tipoDocumento">Estado: </label>
+			<label for="tipoDocumento">Tipo do Documento: </label>
 			<select id="tipoDocumento" name="tipoDocumento" class="form-control">
 			<option value="">---selecione---</option>
 				<c:forEach items="${tipoDocumentos}" var="tipoDocumento">

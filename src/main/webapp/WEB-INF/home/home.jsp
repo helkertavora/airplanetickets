@@ -25,7 +25,8 @@
 	<jsp:include page="/templates/menu-aplicacao.jsp"></jsp:include>
 
 	<section id="home" >
-		<h1>bem vindo!!</h1>
+		<h1>bem vindo ao AirplaneTickets!!</h1>
+		<img alt="" style="width: 1140px; height: 500px" src="${path}/static/images/fa7.jpg">
 	</section>
 	
 	</div>
