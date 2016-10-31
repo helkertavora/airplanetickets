@@ -18,11 +18,11 @@ public class Passagem extends BaseModel {
 
 	private static final long serialVersionUID = 7843226344506258083L;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_passageiro", nullable = false)
     private Passageiro passageiro;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_reserva", nullable = false)
     private Reserva reserva;
 

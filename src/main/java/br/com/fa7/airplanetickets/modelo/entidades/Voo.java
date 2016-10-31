@@ -41,11 +41,11 @@ public class Voo extends BaseModel {
     @Basic(optional = false)
     private Date dataHoraPrevistoChegada;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_aeroporto_saida", nullable = false)
     private Aeroporto aeroportoSaida;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_aeroporto_chegada", nullable = false)
     private Aeroporto aeroportoChegada;
 
@@ -53,7 +53,7 @@ public class Voo extends BaseModel {
     @Basic(optional = false)
     private Double valor;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_empresa_aerea", nullable = false)
     private EmpresaAerea empresaAerea;
 

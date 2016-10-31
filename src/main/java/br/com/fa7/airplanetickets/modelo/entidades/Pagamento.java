@@ -31,7 +31,7 @@ public class Pagamento extends BaseModel {
     @Column(name = "data")
     private Date data;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_reserva", nullable = false)
     private Reserva reserva;
 

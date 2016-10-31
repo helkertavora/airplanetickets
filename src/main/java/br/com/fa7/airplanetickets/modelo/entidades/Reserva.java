@@ -18,11 +18,11 @@ public class Reserva extends BaseModel {
 
 	private static final long serialVersionUID = 4806908597374820089L;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_voo", nullable = false)
     private Voo voo;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 

@@ -58,7 +58,7 @@ var limparModal = function(){
 				$('#passageiro option[value='+id2+']').attr('selected', true);
 				var id = passagem.reserva.id;
 				$('#reserva option[value='+id+']').attr('selected', true);
-				$('#modal-passageiro').modal('show');
+				$('#modal-passagem').modal('show');
 			});
 				
 		});
